@@ -111,6 +111,12 @@ def draw_results(df,im,min_area=10,shapes=('rectangle', 'triangle','circle','pen
     return image
 
 def find_canny_shapes(image, threshold1=10, threshold2=90,    approxPolyDPvar=0.01):
+    try:
+        return _find_canny_shapes(image, threshold1=threshold1, threshold2=threshold2,    approxPolyDPvar=approxPolyDPvar)
+    except Exception:
+        return pd.DataFrame()
+
+def _find_canny_shapes(image, threshold1=10, threshold2=90,    approxPolyDPvar=0.01):
 
     def canny_edge_blur(image, threshold1=10, threshold2=90):
         image = open_image_in_cv(image, channels_in_output=4)
